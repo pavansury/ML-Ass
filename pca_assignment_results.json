@@ -1,0 +1,289 @@
+{
+  "dataset": {
+    "rows": 303,
+    "columns": 14,
+    "feature_names": [
+      "age",
+      "sex",
+      "cp",
+      "trestbps",
+      "chol",
+      "fbs",
+      "restecg",
+      "thalach",
+      "exang",
+      "oldpeak",
+      "slope",
+      "ca",
+      "thal",
+      "target"
+    ],
+    "missing_values": {
+      "age": 0,
+      "sex": 0,
+      "cp": 0,
+      "trestbps": 0,
+      "chol": 0,
+      "fbs": 0,
+      "restecg": 0,
+      "thalach": 0,
+      "exang": 0,
+      "oldpeak": 0,
+      "slope": 0,
+      "ca": 0,
+      "thal": 0,
+      "target": 0
+    },
+    "duplicates": 1
+  },
+  "eda": {
+    "summary": {
+      "age": {
+        "count": 303.0,
+        "mean": 54.366,
+        "std": 9.082,
+        "min": 29.0,
+        "25%": 47.5,
+        "50%": 55.0,
+        "75%": 61.0,
+        "max": 77.0
+      },
+      "sex": {
+        "count": 303.0,
+        "mean": 0.683,
+        "std": 0.466,
+        "min": 0.0,
+        "25%": 0.0,
+        "50%": 1.0,
+        "75%": 1.0,
+        "max": 1.0
+      },
+      "cp": {
+        "count": 303.0,
+        "mean": 0.967,
+        "std": 1.032,
+        "min": 0.0,
+        "25%": 0.0,
+        "50%": 1.0,
+        "75%": 2.0,
+        "max": 3.0
+      },
+      "trestbps": {
+        "count": 303.0,
+        "mean": 131.624,
+        "std": 17.538,
+        "min": 94.0,
+        "25%": 120.0,
+        "50%": 130.0,
+        "75%": 140.0,
+        "max": 200.0
+      },
+      "chol": {
+        "count": 303.0,
+        "mean": 246.264,
+        "std": 51.831,
+        "min": 126.0,
+        "25%": 211.0,
+        "50%": 240.0,
+        "75%": 274.5,
+        "max": 564.0
+      },
+      "fbs": {
+        "count": 303.0,
+        "mean": 0.149,
+        "std": 0.356,
+        "min": 0.0,
+        "25%": 0.0,
+        "50%": 0.0,
+        "75%": 0.0,
+        "max": 1.0
+      },
+      "restecg": {
+        "count": 303.0,
+        "mean": 0.528,
+        "std": 0.526,
+        "min": 0.0,
+        "25%": 0.0,
+        "50%": 1.0,
+        "75%": 1.0,
+        "max": 2.0
+      },
+      "thalach": {
+        "count": 303.0,
+        "mean": 149.647,
+        "std": 22.905,
+        "min": 71.0,
+        "25%": 133.5,
+        "50%": 153.0,
+        "75%": 166.0,
+        "max": 202.0
+      },
+      "exang": {
+        "count": 303.0,
+        "mean": 0.327,
+        "std": 0.47,
+        "min": 0.0,
+        "25%": 0.0,
+        "50%": 0.0,
+        "75%": 1.0,
+        "max": 1.0
+      },
+      "oldpeak": {
+        "count": 303.0,
+        "mean": 1.04,
+        "std": 1.161,
+        "min": 0.0,
+        "25%": 0.0,
+        "50%": 0.8,
+        "75%": 1.6,
+        "max": 6.2
+      },
+      "slope": {
+        "count": 303.0,
+        "mean": 1.399,
+        "std": 0.616,
+        "min": 0.0,
+        "25%": 1.0,
+        "50%": 1.0,
+        "75%": 2.0,
+        "max": 2.0
+      },
+      "ca": {
+        "count": 303.0,
+        "mean": 0.729,
+        "std": 1.023,
+        "min": 0.0,
+        "25%": 0.0,
+        "50%": 0.0,
+        "75%": 1.0,
+        "max": 4.0
+      },
+      "thal": {
+        "count": 303.0,
+        "mean": 2.314,
+        "std": 0.612,
+        "min": 0.0,
+        "25%": 2.0,
+        "50%": 2.0,
+        "75%": 3.0,
+        "max": 3.0
+      }
+    },
+    "target_distribution": {
+      "1": 165,
+      "0": 138
+    },
+    "sex_distribution": {
+      "1": 207,
+      "0": 96
+    },
+    "correlation_with_target": {
+      "target": 1.0,
+      "cp": 0.434,
+      "thalach": 0.422,
+      "slope": 0.346,
+      "restecg": 0.137,
+      "fbs": -0.028,
+      "chol": -0.085,
+      "trestbps": -0.145,
+      "age": -0.225,
+      "sex": -0.281,
+      "thal": -0.344,
+      "ca": -0.392,
+      "oldpeak": -0.431,
+      "exang": -0.437
+    }
+  },
+  "modeling": {
+    "kmeans_scree": {
+      "k_values": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "inertia": [
+        3330.765,
+        3083.355,
+        2870.534,
+        2724.422,
+        2629.21,
+        2553.243,
+        2441.152,
+        2365.693,
+        2309.461
+      ],
+      "silhouette": [
+        0.1682,
+        0.1139,
+        0.1193,
+        0.1175,
+        0.1113,
+        0.0847,
+        0.1154,
+        0.1125,
+        0.1128
+      ],
+      "selected_k": 2
+    },
+    "pca": {
+      "explained_variance_ratio": [
+        0.2125,
+        0.1182,
+        0.0941
+      ],
+      "cumulative_variance_3": 0.4248,
+      "components_shape": [
+        303,
+        3
+      ]
+    },
+    "cluster_quality": {
+      "original_kmeans_silhouette": 0.1682,
+      "original_hierarchical_silhouette": 0.1325,
+      "pca_kmeans_silhouette": 0.3376,
+      "pca_hierarchical_silhouette": 0.2897
+    },
+    "cluster_comparison": {
+      "ari_kmeans_original_vs_pca": 0.9474,
+      "ari_hierarchical_original_vs_pca": 0.3771,
+      "ari_kmeans_vs_hierarchical_original": 0.5256,
+      "ari_kmeans_vs_hierarchical_pca": 0.569,
+      "ward_last_merge_distances": [
+        11.135,
+        11.855,
+        12.73,
+        14.093,
+        14.112,
+        15.565,
+        16.004,
+        21.741,
+        22.434,
+        29.961
+      ]
+    },
+    "cluster_sizes": {
+      "original_kmeans": {
+        "0": 105,
+        "1": 198
+      },
+      "original_hierarchical": {
+        "0": 203,
+        "1": 100
+      },
+      "pca_kmeans": {
+        "0": 109,
+        "1": 194
+      },
+      "pca_hierarchical": {
+        "0": 177,
+        "1": 126
+      }
+    }
+  }
+}

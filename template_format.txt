@@ -1,0 +1,86 @@
+DATA ANALYSIS REPORT
+Name: Pavan Sajjan Suryawanshi
+Roll No: AI3078
+Topic: DATA ANALYSIS REPORT
+ASSIGNMENT
+
+TYPE OF EXAM: TAKE DATA FROM ONLINE SOURCSES
+ANALYZE DATA FOR ALGORITMS
+1. DECISION TREE
+2. RANDOM FOREST
+3. LOGISTIC REGRATION
+Problem Statement
+The aim of this project is to analyze financial customer data and predict whether a customer will
+default within the next two years. The prediction is based on several financial indicators. This is a
+binary classification task using machine learning algorithms.
+
+1. Import Libraries
+
+2. Load Dataset
+
+3. Data Preprocessing
+
+4. Train-Test Split
+
+5. Feature Scaling (for Logistic Regression)
+
+6. DECISION TREE
+
+7. RANDOM FOREST
+
+8. LOGISTIC REGRESSION
+
+DATA ANALYSIS
+1. Data Collection & Cleaning
+• I downloaded the dataset from an online source.
+• Removed missing values using mean imputation.
+• Verified datatypes and checked for outliers.
+• Separated the dataset into features (X) and label (y).
+The purpose of data cleaning was to make the dataset suitable for ML algorithms.
+
+2. Data Analysis
+I performed basic analysis to understand how each feature affects the default risk.
+Examples you can tell:
+• Higher credit utilization increases default chances
+• More late payments increase risk
+• Lower income and higher debt ratio often lead to defaults
+This shows understanding.
+
+3. Splitting the Data
+I divided the data into 80% training and 20% testing to evaluate model performance.
+
+4. Algorithms Used
+As per the assignment guidelines, I applied three algorithms:
+
+A. Decision Tree Classifier
+• Simple rule-based model
+• Learns conditions like “If utilization > 0.89 and income < X, then default”
+• Accuracy: ~ 89.73%
+Decision Tree helped me understand the decision rules behind credit risk.
+
+B. Random Forest Classifier
+• An ensemble of many decision trees
+• Reduces overfitting
+• Gave the best accuracy of around 93.67%
+Random Forest performed best because it combines multiple trees to give stable predictions.
+
+C. Logistic Regression
+• Suitable for binary classification
+• Works well after feature scaling
+• Accuracy: ~ 93.50%
+Logistic regression gave good results because the dataset is numeric and linear relationships
+exist.
+
+5. Evaluation Metrics
+For each model, I calculated:
+• Accuracy Score
+• Confusion Matrix
+The confusion matrix helps me understand how many defaults and non-defaults were
+correctly predicted.
+
+Conclusion
+Among all three models, Random Forest achieved the highest accuracy and provided the most
+reliable results. It is recommended for credit risk prediction due to its robustness and ability to
+handle complex data.
+
+

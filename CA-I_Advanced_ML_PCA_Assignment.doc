@@ -1,0 +1,205 @@
+MSPMS
+DEOGIRI INSTITUTE OF ENGINEERING & MANAGEMENT STUDIES, AURANGABAD
+DEPARTMENT OF CSE (AI & ML)
+A.Y. 2025-26, SEM-II
+CONTINUOUS ASSESSMENT-I (CA-I)
+SUBJECT: ADVANCED MACHINE LEARNING (BTAIC602)
+TOPIC: PRINCIPAL COMPONENT ANALYSIS (PCA) WITH CLUSTERING
+
+IMPORTANT NOTICE
+All TY students are informed to submit the CA-I assignment in Google Classroom.
+Submission deadline: 25/03/2026
+
+STUDENT DETAILS
+Name: ______________________
+Roll No.: ___________________
+Class: T.Y. CSE (AI & ML)
+
+============================================================
+ASSIGNMENT TITLE
+Dimension Reduction with PCA and Clustering on Heart Disease Dataset
+============================================================
+
+1. BUSINESS PROBLEM
+1.1 Business Objective:
+A pharmaceuticals manufacturing company wants to analyze heart disease patient data and identify groups of similar patients based on age and clinical factors. The goal is to perform clustering before and after PCA and check whether patient segmentation remains similar after dimensionality reduction.
+
+1.2 Constraints:
+- Medical data contains mixed clinical indicators and encoded categorical variables.
+- Features are on different scales, so normalization/scaling is required.
+- Clustering quality may vary by algorithm and value of K.
+- Need an explainable, compact representation of data using principal components.
+
+============================================================
+2. DATA DICTIONARY
+Dataset used: heart disease.xlsx
+Total rows: 303
+Total columns: 14
+
++-----------+----------+----------------------------------------------+---------------------------+
+| Feature   | DataType | Description                                  | Relevance to Model        |
++-----------+----------+----------------------------------------------+---------------------------+
+| age       | int64    | Age of patient                               | Relevant (risk factor)    |
+| sex       | int64    | Gender (0=female, 1=male)                    | Relevant                  |
+| cp        | int64    | Chest pain type                              | Highly relevant           |
+| trestbps  | int64    | Resting blood pressure                       | Relevant                  |
+| chol      | int64    | Serum cholesterol                            | Relevant                  |
+| fbs       | int64    | Fasting blood sugar > 120 mg/dl              | Moderately relevant       |
+| restecg   | int64    | Resting ECG results                          | Relevant                  |
+| thalach   | int64    | Maximum heart rate achieved                  | Highly relevant           |
+| exang     | int64    | Exercise induced angina                      | Highly relevant           |
+| oldpeak   | float64  | ST depression induced by exercise            | Highly relevant           |
+| slope     | int64    | Slope of peak exercise ST segment            | Relevant                  |
+| ca        | int64    | Number of major vessels (0-4)                | Highly relevant           |
+| thal      | int64    | Thalassemia category                         | Relevant                  |
+| target    | int64    | Heart disease presence (1=yes, 0=no)         | NOT used for clustering*  |
++-----------+----------+----------------------------------------------+---------------------------+
+
+*Note: target was excluded during unsupervised clustering to avoid leakage and used only for interpretation.
+
+============================================================
+3. DATA PRE-PROCESSING
+3.1 Data Cleaning:
+- Missing values checked: none found in all 14 columns.
+- Duplicate records found: 1 duplicate row.
+- No invalid null-like strings observed.
+
+3.2 Feature Engineering / Transformation:
+- Removed target from clustering input features.
+- Applied StandardScaler to all 13 predictor features before clustering and PCA.
+- Created PCA dataset with 3 principal components: PC1, PC2, PC3.
+
+============================================================
+4. EXPLORATORY DATA ANALYSIS (EDA)
+4.1 Summary:
+- Age mean: 54.366 years (range 29 to 77)
+- Resting BP mean (trestbps): 131.624
+- Cholesterol mean: 246.264
+- Max heart rate mean (thalach): 149.647
+- Oldpeak mean: 1.040
+- Target distribution: 165 (disease), 138 (no disease)
+
+4.2 Univariate Analysis:
+- Dataset is moderately balanced for target classes.
+- Sex distribution: male=207, female=96.
+- Most patients have fbs=0 and exang=0.
+- Clinical variables like chol and trestbps show wider spread than binary variables.
+
+4.3 Bivariate Analysis (Correlation with target):
+Top positive correlations with target:
+- cp: +0.434
+- thalach: +0.422
+- slope: +0.346
+
+Top negative correlations with target:
+- exang: -0.437
+- oldpeak: -0.431
+- ca: -0.392
+- thal: -0.344
+
+Inference:
+Chest pain type, max heart rate, exercise angina, oldpeak, and vessel count are strong factors separating heart disease patterns.
+
+============================================================
+5. MODEL BUILDING
+5.1 Models on Scaled Original Data:
+Algorithms used:
+- K-Means clustering
+- Hierarchical clustering (Ward linkage)
+
+K-Means scree/elbow inputs (K vs inertia):
+K=2: 3330.765
+K=3: 3083.355
+K=4: 2870.534
+K=5: 2724.422
+K=6: 2629.210
+K=7: 2553.243
+K=8: 2441.152
+K=9: 2365.693
+K=10: 2309.461
+
+Silhouette scores (original scaled data):
+K=2: 0.1682
+K=3: 0.1139
+K=4: 0.1193
+K=5: 0.1175
+K=6: 0.1113
+K=7: 0.0847
+K=8: 0.1154
+K=9: 0.1125
+K=10: 0.1128
+
+Selected optimum clusters: K=2
+(Highest silhouette and clear elbow trend)
+
+Cluster quality on original scaled data:
+- K-Means silhouette: 0.1682
+- Hierarchical silhouette: 0.1325
+
+Cluster sizes:
+- K-Means (original): [105, 198]
+- Hierarchical (original): [203, 100]
+
+5.2 PCA Analysis:
+Number of components extracted: 3
+Explained variance ratio:
+- PC1: 0.2125
+- PC2: 0.1182
+- PC3: 0.0941
+Cumulative variance by first 3 PCs: 0.4248 (42.48%)
+
+New dataset created:
+- File: heart_pca_3_components.csv
+- Shape: (303, 3)
+
+5.3 Clustering on PCA Dataset (PC1, PC2, PC3):
+Using same K=2 for comparison.
+
+Cluster quality on PCA data:
+- K-Means silhouette: 0.3376
+- Hierarchical silhouette: 0.2897
+
+Cluster sizes:
+- K-Means (PCA): [109, 194]
+- Hierarchical (PCA): [177, 126]
+
+5.4 Comparison Before vs After PCA:
+Adjusted Rand Index (ARI) comparisons:
+- K-Means original vs K-Means PCA: 0.9474 (very high similarity)
+- Hierarchical original vs Hierarchical PCA: 0.3771 (moderate change)
+- K-Means vs Hierarchical on original: 0.5256
+- K-Means vs Hierarchical on PCA: 0.5690
+
+Interpretation:
+- PCA preserved K-Means cluster structure almost completely.
+- Hierarchical clustering changed more after PCA.
+- PCA improved separation quality (higher silhouette for both algorithms), especially for K-Means.
+
+============================================================
+6. BENEFITS / IMPACT OF THE SOLUTION
+- Enables patient segmentation into clinically meaningful groups for targeted study and treatment strategy.
+- Reduces dimensionality, making analysis simpler and faster for large datasets.
+- Improves cluster compactness/separation on reduced components, helping better decision support.
+- Supports pharmaceutical R&D by identifying patterns in patient profiles.
+- Helps prioritize high-risk patient groups for medicine response studies.
+
+============================================================
+7. CONCLUSION
+- Optimum number of clusters found: 2.
+- PCA with first 3 components retained 42.48% variance and still maintained very similar K-Means segmentation.
+- Clustering after PCA gave better silhouette scores than clustering on original scaled features.
+- Therefore, PCA is useful for this dataset as a compact representation while preserving major grouping behavior.
+
+============================================================
+8. PYTHON PROGRAM (USED FOR ANALYSIS)
+File: pca_assignment_analysis.py
+
+(Short execution command)
+/home/pavan/Pictures/ML-Ass/.venv/bin/python pca_assignment_analysis.py
+
+Generated output files:
+- pca_assignment_results.json
+- heart_pca_3_components.csv
+
+============================================================
+END OF ASSIGNMENT
